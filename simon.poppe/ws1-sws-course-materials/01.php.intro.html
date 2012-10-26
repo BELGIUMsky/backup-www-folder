@@ -1,0 +1,1537 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Webscripting1 &mdash; Serverside Webscripting &mdash; 01.php.intro</title>
+
+		<meta name="description" content="Webscripting1 &mdash; Serverside Webscripting &mdash; 01.php.intro">
+		<meta name="author" content="Bram(us) Van Damme - ikdoeict.be">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css" media="screen">
+		<link rel="stylesheet" href="css/print.css" media="print">
+
+		<link rel="stylesheet" href="lib/zenburn.css">
+
+		<style>
+			.columns .column {
+				float: left;
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+
+			.column-12 {
+				width: 50%;
+			}
+			code {
+				color: gainsboro;
+			}
+
+			li > code, li em > code, li del > code, li ins > code, p > code {
+				background: #3F3F3F;
+				padding: 2px 4px;
+				box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+				font-size: 80%;
+			}
+			
+			del code, code.nok {
+				color: #C55;
+			}
+			
+			ins code, code.ok {
+				color: #5C5;
+			}
+
+			table {
+				font-size: 15px;
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			table td, table th {
+				line-height: 1.4;
+				border: 1px solid #ccc;
+				padding: 4px;
+			}
+
+			table th {
+				background: #333;
+			}
+		</style>
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+
+				<!-- 0 : Title -->
+				<section>
+					<section>
+						<h3 class="inverted">Serverside Webscripting <small>[JLW274]</small></h3>
+						<h1>01.php.intro</h1>
+					
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+						<script>
+							// Delicously hacky. Look away.
+							if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
+							document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+						</script>
+					</section>
+				</section>
+				
+
+				<!-- PHP & Running PHP -->
+				<section>
+					<section>
+						<h2>PHP Introduction</h2>
+					</section>
+
+					<section>
+						<h2>PHP</h2>
+						<ul>
+							<li class="fragment">
+								Short for <em>PHP: Hypertext Preprocessor</em>
+							</li>
+							<li class="fragment">
+								Scripting language
+								<ul>
+									<li>Loose syntax</li>
+									<li>
+										Not compiled for distribution (cfr. Java), but interpreted at runtime
+										<ul>
+											<li>Therefor it's slower than compiled languages</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Very popular on the internet
+								<ul>									
+									<li>One of the first Serverside Scripting Languages (° 1995)</li>
+									<li>PHP plugins exist for nearly all web servers and OSes</li>
+									<li>e.g. Wordpress, Facebook, Wikipedia, etc.</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Suffers from historical cruft &amp; syntax inconsistencies
+							</li>
+							<li class="fragment">
+								Current version: 5.4.7
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Obtaining PHP</h2>
+						<ul>
+							<li class="fragment">
+								A preconfigured PHP is included in <a href="http://www.wampserver.com/en/">Wampserver</a> / <a href="http://mamp.info/en">MAMP</a>
+								<ul>
+									<li>Install one of these for this course</li>
+									<li>Follow <a href="http://helpdesk.ikdoeict.be/index.php?/Knowledgebase/Article/View/11/0/howto-installatieconfiguratie-van-software-wamplamp-stack">these instructions</a> afer installation</li>
+									<li>On Windows, also add <code>C:\wamp\bin\php\<em>version</em>\</code> to the system's <code>PATH</code> variable</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Shipped with most Unix/Linux distributions
+							</li>
+							<li class="fragment">
+								PHP can be downloaded from <a href="http://php.net">http://php.net</a>.
+								<ul>
+									<li>Just extract the <code>.zip</code> onto your filesystem and you're good to go</li>
+									<li>Windows users must download from <a href="http://windows.php.net/">http://windows.php.net/</a></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Configuring PHP</h2>
+						<ul>
+							<li class="fragment">
+								PHP can be configured via a file named <code>php.ini</code>
+							</li>
+							<li class="fragment">We'll take a closer look at this file when it's needed</li>
+							<li class="fragment">Note: the <code>php.ini</code> shipped with Wampserver/MAMP is configured correctly</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Running PHP (1)</h2>
+						<ul>
+							<li class="fragment">
+								From the shell
+								<ul>
+									<li class="fragment">Run <code>php -a</code> to get an interative shell at which you can type in PHP statements
+										<ul class="fragment">
+											<li>cfr. the MySQL shell where you type in SQL statements (queries)</li>
+											<li>A <code>;</code> ends a statement</li>
+											<li>Type <code>quit</code> or <code>exit</code> to leave the shell</li>
+										</ul>
+										<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php -a
+Interactive shell
+
+php &gt; echo 'hello';
+hello
+php &gt; quit
+bramus$</code></pre></div>
+									</li>
+								</ul>
+							</li>
+						</section>
+
+					<section>
+						<h2>Running PHP (2)</h2>
+						<ul>
+							<li>
+								From the shell <em>(continued)</em>
+								<ul>
+									<li class="fragment">
+										Run <code>php -r &quot;<em>one line of PHP code</em>&quot;</code> to run a single line of PHP code
+										<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php -r &quot;echo 'hello' . PHP_EOL;&quot;
+hello
+bramus$</code></pre></div>
+									</li>
+									<li class="fragment">
+										Run <code>php [-f] <em>file.php</em></code> to &ldquo;execute&rdquo; a file that contains PHP code
+										<ul class="fragment">
+											<li>You must wrap your PHP code between <code>&lt;?php</code> and <code>?&gt;</code></li>
+											<li>The closing <code>?&gt;</code> is optional.</li>
+										</ul>
+										<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
+	echo 'hello' . PHP_EOL;
+?&gt;</code></pre></div>
+<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php cli-example.php
+hello
+bramus$</code></pre></div>
+									</li>
+								</ul>
+							</li>
+						</section>
+
+					<section>
+						<h2>Running PHP (3)</h2>
+						<ul>
+							<li class="fragment">
+								In a web context
+								<ul>
+									<li>Give your file a <code>.php</code> extension and the PHP interpreter will interpret the file
+										<ul>
+											<li>The webserver must of course be configured to do so</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+				
+
+				<!-- PHP Syntax: Variables/Arrays/Casting, -->
+				<section>
+					<section>
+						<h2>PHP Variables</h2>
+					</section>
+
+					<section>
+						<h2>Before we dive in</h2>
+						<ul>
+							<li class="fragment">
+								Strings are enclosed by <code>'</code> or <code>&quot;</code>
+							</li>
+							<li class="fragment">
+								Use <code>echo</code> or <code>print</code> to output something onscreen.
+								<pre class="bigger"><code class="language-php">bramus$ php -a
+Interactive shell
+
+php &gt; echo 'hello';
+hello
+php &gt; echo('hello');
+hello
+php &gt; print 'hello';
+hello
+php &gt; print('hello');
+hello</code></pre>
+								<ul>
+									<li class="fragment">The first example is the preferred syntax</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Statements end in a <code>;</code>
+								<pre class="bigger"><code class="language-php">php &gt; echo 'hello'
+php &gt; ;
+hello</code></pre>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Name, Value &amp; Type</h2>
+						<ul>
+							<li class="fragment">
+								Variables have a <em>name</em> and a <em>value</em>
+								<ul class="fragment">
+									<li>Variable names start with a <code>$</code></li>
+								</ul>
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $a = 3;
+php &gt; echo $a;
+3</code></pre></div>
+							</li>
+							<li class="fragment">
+								Variables are of a certain type
+								<ul>
+									<li>Primitive types: boolean, integer, float <em>(aka double)</em>, string</li>
+									<li>Combined types: Array, Object</li>
+									<li>Special types: resource, NULL</li>
+									<li>Pseudo types: mixed, number, callback</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Dynamic &amp; Weak typing</h2>
+						<ul>
+							<li class="fragment">PHP is dynamically typed
+								<ul>
+									<li>When declaring a variable, you cannot specify the type. PHP will <em>guess</em> the data type when assigning a value</li>
+								</ul>
+							</li>
+							<li class="fragment">PHP is weakly typed
+								<ul>
+									<li>PHP will adjust the type of a var when a new value is assigned
+										<ul>
+											<li>This phenomenon is known as <em>implicit type conversion</em> or <em>coercion</em></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">Both are typical properties of scripting languages</li>
+						</ul>
+						<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $a = 3;
+php &gt; echo gettype($a);
+integer
+php &gt; $a = 'Hello';
+php &gt; echo gettype($a);
+string</code></pre></div>
+					</section>
+
+					<section>
+						<h2>Type casting</h2>
+						<ul>
+							<li class="fragment">
+								To enforce a variable being of a certain type, you must explicitly cast it to that type
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $a = 3;
+php &gt; echo gettype($a);
+integer
+php &gt; $a = (string) $a;
+php &gt; echo gettype($a);
+string</code></pre></div>
+					</section>
+
+					<section>
+						<h2>A few pointers</h2>
+						<ul>
+							<li class="fragment">
+								PHP is case sensitive
+								<ul>
+									<li>
+										<code>$firstName</code> and <code>$firstname</code> are not the same!
+										<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $firstName = 'Bramus';
+php &gt; echo $firstName;
+Bramus
+php &gt; echo $firstname;
+
+Notice: Undefined variable: firstname in php shell code on line 1</code></pre></div>
+									</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								To concatenate strings, you must use a <code>.</code>
+								<ul>
+									<li>
+										When using a <code>+</code>, PHP will think you're adding numbers <em>(weak typing!)</em>
+										<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $firstName = 'Bramus';
+php &gt; $lastName = 'Van Damme',
+php &gt; echo $firstName + ' ' + $lastName;
+0
+php &gt; echo $firstName . ' ' . $lastName;
+Bramus Van Damme
+</code></pre></div>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Interpolation</h2>
+						<ul>
+							<li class="fragment">
+								Also known as <em>Variable Substitution</em>
+							</li>
+							<li class="fragment">
+								When enclosed between <code>&quot;</code>, PHP will try to substitute any string that could resemble a variable
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $firstName = 'Bramus';
+php &gt; echo "variable: $firstName\n";
+variable: Bramus
+php &gt; echo "variable: \$firstName\n";
+variable: $firstName
+php &gt; echo 'variable: $firstName\n';
+variable: $firstName\n
+php &gt; echo 'variable: \$firstName\n';
+variable: \$firstName\n
+php &gt; echo 'variable: ' . $firstName . '\n';
+variable: Bramus\n
+php &gt; echo 'variable: ' . $firstName . "\n";
+variable: Bramus
+php &gt; echo 'variable: ' . $firstName . PHP_EOL;
+variable: Bramus</code></pre></div>
+								<ul>
+									<li class="fragment">Course convention: always use <code>'</code> to prevent interpolation</li>
+									<li class="fragment">Course convention: always use <code>PHP_EOL</code> instead of <code>&quot;\n&quot;</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Arrays (1)</h2>
+						<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $arr = array();
+php &gt; $arr[] = 'se7en';
+php &gt; $arr[] = 123;
+php &gt; $arr[] = true;
+php &gt; echo $arr[1];
+123</code></pre></div>
+						<ul class="fragment">
+							<li>Declaration rule isn't mandatory but attests a good coding style</li>
+							<li>Mixing of types forms no problem</li>
+							<li>Automatic indexing</li>
+							<li>Index is numeric and sequential. We call this type of array a <em>sequential array</em></li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Arrays (2)</h2>
+						<ul class="fragment">
+							<li>It's possible to set the start index</li>
+						</ul>
+						<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $arr = array();
+php &gt; $arr[2] = 'se7en';
+php &gt; $arr[] = 123;
+php &gt; $arr[] = true;
+php &gt; echo $arr[3];
+123</code></pre></div>
+					</section>
+
+					<section>
+						<h2>Arrays (3)</h2>
+						<ul>
+							<li class="fragment">
+								It's possible to set the indices/keys yourself
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $arr = array();
+php &gt; $arr[2] = 'se7en';
+php &gt; $arr[8] = 123;
+php &gt; $arr[4] = true;
+php &gt; echo $arr[8];
+123</code></pre></div>
+							</li>
+							<li class="fragment">
+								Indices/keys can be strings too
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $arr = array();
+php &gt; $arr['BE'] = 'Belgium';
+php &gt; $arr['NL'] = 'The Netherlands';
+php &gt; $arr['FR'] = 'France';
+php &gt; echo $arr['BE'];
+Belgium</code></pre></div>
+							</li>
+							<li class="fragment">We call these <em>associative array</em>s</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Arrays (4)</h2>
+						<ul>
+							<li class="fragment">
+								It's possible to declare and initialize an array in one go
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $arr1 = array('Brussels', 'Ghent', 'Antwerp');</code></pre></div>
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $arr2 = array('NL' => 'The Netherlands', 'BE' => 'Belgium');</code></pre></div>
+<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $arr2 = array(
+php ( 'NL' => 'The Netherlands',
+php ( 'BE' => 'Belgium'
+php ( );</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+				
+
+				<!-- Code Comments -->
+				<section>
+					<section>
+						<h2>Code Comments</h2>
+					</section>
+					<section>
+						<h2>Code Comments</h2>
+						<ul>
+							<li class="fragment">
+								Same as in Java
+								<div class="fragment"><pre class="bigger"><code class="language-php">// Single line comment
+
+/* Multi
+line
+comment
+*/
+
+/**
+ * Preferred way
+ * to layout
+ * multi-line
+ * comments
+ */</code></pre></div>
+							</li>
+						</ul>
+					</section>
+				</section>
+				
+
+				<!-- Selections/Iterations/Operators -->
+				<section>
+					<section>
+						<h2>Selections, Iterations &amp; Operators</h2>
+					</section>
+
+					<section>
+						<h2>Selections (1)</h2>
+						<ul>
+							<li class="fragment">
+								Same as in Java
+								<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
+
+	if ($condition) {
+		// do something
+	}
+	
+	if ($condition) {
+		// do something
+	} else {
+		// do something else
+	}
+	
+	switch ($var) {
+		
+		case $value1: 
+			// do something
+			break;
+			
+		case $value2:
+			// do something 
+			break; 
+			
+		default:
+			// do something
+			
+	}</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Selections (2)</h2>
+						<ul>
+							<li class="fragment">
+								Example
+								<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
+
+	$a = 7;
+	if ($a < 9) {
+		echo '$a is less than 9';
+	} else {
+		echo '$a is greater than 9';
+	}</code></pre></div>
+								<ul>
+									<li class="fragment">Course convention: always place curly brackets</li>
+									<li class="fragment">Course convention: place the curly brackets on the same line</li>
+									<li class="fragment">Course convention: indent one <code>TAB</code> inside curly brackets</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								When possible, use the ternary operator
+								<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
+
+	$a = 7;
+	echo (($a < 9) ? '$a is less than 9' : '$a is greater than 9');</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Iterations (1)</h2>
+						<ul>
+							<li class="fragment">
+								Again, same as in Java
+								<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
+
+	while ($condition) {
+		// do something
+	}
+	
+	do {
+		// do something
+	} while ($condition);
+	
+	for ($x = 0; $x &lt; 5; $x++) {
+		// do something
+	}
+
+	foreach ($arr as $value) {
+		// do something
+	}
+
+	foreach ($arr as $key => $value) {
+		// do something
+	}</code></pre></div>
+								<ul>
+									<li class="fragment">Also possible to use <code>break;</code> and <code>continue;</code></li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Iterations (2)</h2>
+						<ul>
+							<li class="fragment">
+								Example
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; for ($x = 1; $x &lt;= 5; $x++) {
+php { echo 'Hello 2ICT' . $x . PHP_EOL;
+php { }
+Hello 2ICT1
+Hello 2ICT2
+Hello 2ICT3
+Hello 2ICT4
+Hello 2ICT5</code></pre></div>
+							</li>
+							<li class="fragment">
+								Example
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $countries = array('BE' => 'Belgium', 'NL' => 'The Netherlands');
+php &gt; foreach ($countries as $key =&gt; $value) {
+php { echo $key . ' = ' . $value . PHP_EOL;
+php { }
+BE = Belgium
+NL = The Netherlands</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Operators</h2>
+						<ul>
+							<li class="fragment">
+								Same as in Java
+								<ul>
+									<li>Relational operators: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
+									<li>Logical operators: <code>&amp;&amp;</code>, <code>||</code>, <code>!</code>, <code>&amp;</code>, <code>|</code></li>
+									<li>Post/pre- in/de-crement: <code>$var--</code>, <code>$var++</code>, <code>--$var</code>, <code>++$var</code></li>
+									<li>Math shorthands: <code>+=</code>, <code>*=</code>, &hellip;</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Since PHP4 support for identical operators: check for both type and value to be equal
+								<div><pre class="bigger"><code class="language-php">php &gt; $a = 13; // integer
+php &gt; $b = 13.0; // double
+php &gt; echo ($a == $b) ? 'equal' : 'not equal';
+equal
+php &gt; echo ($a === $b) ? 'equal' : 'not equal';
+not equal</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+				<!-- Functions: Built-in PHP Functions, Roll your own functions -->
+				<section>
+					<section>
+						<h2>PHP Functions</h2>
+					</section>
+
+					<section>
+						<h2>Built-in Functions (1)</h2>
+						<ul>
+							<li class="fragment">PHP has a lot of functions built-in</li>
+							<li class="fragment">
+								A few string-related functions
+								<ul>
+									<li><code>addslashes</code>/<code>stripslashes</code> &mdash; <em>see 04.forms</em></li>
+									<li><code>ltrim</code>/<code>rtrim</code>/<code>trim</code> &mdash; strips leading/trailing/enclosing whitespace</li>
+									<li><code>str_replace</code> &mdash; replaces a part of a string with an other value</li>
+									<li><code>strip_tags</code> &mdash; strips html from a string</li>
+									<li><code>strlen</code> &mdash; returns the length of a string</li>
+									<li><code>strtolower</code>/<code>strtoupper</code> &mdash; convert a string to uppercase/lowercase</li>
+									<li><code>substr</code> &mdash; extract a part of a string</li>
+									<li>...</li>
+								</ul>
+							</li>
+						</ul>
+						<footer class="fragment">How to use: see <code>http://php.net/<em>nameofthefunction</em></code></footer>
+					</section>
+
+					<section>
+						<h2>Built-in Functions (2)</h2>
+						<ul>
+							<li class="fragment">
+								A few math-related functions
+								<ul>
+									<li><code>ceil</code> &mdash; round fractions up</li>
+									<li><code>floor</code> &mdash; round fractions down</li>
+									<li><code>round</code> &mdash; round a float</li>
+									<li><code>rand</code>/<code>mt_rand</code> &mdash; generate a random number</li>
+									<li><code>sqrt</code> &mdash; calculate the square root of a number</li>
+									<li>...</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Built-in Functions (3)</h2>
+						<ul>
+							<li class="fragment">
+								A few array-related functions
+								<ul>
+									<li><code>sizeof</code>/<code>count</code> &mdash; get the size of an array</li>
+									<li><code>sort</code> &mdash; sort an array</li>
+									<li><code>asort</code> &mdash; sort an associative array</li>
+									<li><code>explode</code> &mdash; split a string on a given delimiter and get an array</li>
+									<li><code>implode</code> &mdash; opposite of <code>explode</code></li>
+									<li><code>array_push</code> &mdash; push an element onto an array</li>
+									<li><code>array_pop</code> &mdash; get an element off the end of an array</li>
+									<li><code>array_key_exists</code> &mdash; check if a key in an associative array exists</li>
+									<li>...</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Custom functions (1)</h2>
+						<ul>
+							<li class="fragment">
+								Same as in Java
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/functions-chopstringend1.php">&lt;?php
+
+	// Our chopStringEnd function
+	function chopStringEnd($str, $len, $ending) { 
+		if (strlen($str) &lt; $len)
+			return $str;
+		else
+			return substr($str, 0, $len - strlen($str)) . $ending;
+	}
+	
+	// Our variables
+	$origStr = '/Users/bramus/Dropbox/Kaho/Lesactiviteiten/Webscripting1';
+	$cutoffLength = 40;
+	$endStr	= '...';
+		
+	// Go!
+	echo chopStringEnd($origStr, $cutoffLength, $endStr);</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Custom functions (2)</h2>
+						<ul>
+							<li class="fragment">
+								Possible to define default values for function arguments
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/functions-chopstringend2.php">&lt;?php
+
+	// Our chopStringEnd function
+	function chopStringEnd($str, $len = 30, $ending = '---') { 
+		if (strlen($str) &lt; $len)
+			return $str;
+		else
+			return substr($str, 0, $len - strlen($str)) . $ending;
+	}
+	
+	// Our variables
+	$origStr = '/Users/bramus/Dropbox/Kaho/Lesactiviteiten/Webscripting1';
+	$cutoffLength = 40;
+	$endStr = '...';
+		
+	// Go!
+	echo chopStringEnd($origStr, $cutoffLength, $endStr) . PHP_EOL;
+	echo chopStringEnd($origStr, $cutoffLength) . PHP_EOL;
+	echo chopStringEnd($origStr);</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Custom functions (3)</h2>
+						<ul>
+							<li class="fragment">
+								Provide <a href="http://manual.phpdoc.org/HTMLSmartyConverter/PHP/phpDocumentor/tutorial_tags.pkg.html">PHPDoc</a>-style comments
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/functions-chopstringend3.php">&lt;?php
+
+	/**
+	 * Chops a string at the given length with the given ending
+	 * 
+	 * @param	string 	$str 	The initial String
+	 * @param	int 	$len 	The length to chop off at
+	 * @param	string 	$ending	The ending to add
+	 * 
+	 * @return	string 	The circumcised up string
+	 */
+	function chopStringEnd($str, $len = 30, $ending = '---') { 
+		if (strlen($str) &lt; $len)
+			return $str;
+		else
+			return substr($str, 0, $len - strlen($str)) . $ending;
+	}
+
+	...</code></pre></div>
+							</li>
+						</ul>
+							<footer class="fragment">This way your IDE will tell you which params are needed, what type they need to be, etc.</footer>
+					</section>
+				</section>
+				
+
+				<!-- Scoping: Problem, global keywoard, define() function -->
+				<section>
+					<section>
+						<h2>Scoping</h2>
+					</section>
+
+					<section>
+						<h2>Problem</h2>
+						<ul>
+							<li class="fragment">
+								This won't work
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/scoping1.php">&lt;?php
+
+	$host = 'http://www.myhost.com/';
+
+	function absUrl($relUrl) {
+		return $host.$relUrl;
+	}
+
+	echo absUrl('files/uploads/me.jpg');</code></pre></div>
+							</li>
+							<li class="fragment">
+								Result
+								<div class="fragment"><pre class="bigger"><code class="language-php">Notice: Undefined variable: host in /Users/bramus/Dropbox/Kaho/Lesactiviteiten/.../assets/01/examples/scoping1.php on line 8
+files/uploads/me.jpg</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>How we would've fixed this in 1995</h2>
+						<ul>
+							<li class="fragment">
+								The <code>global</code> keyword to the rescue
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/scoping2.php">&lt;?php
+
+	$host = 'http://www.myhost.com/';
+
+	function absUrl($relUrl) {
+		global $host;
+		return $host . $relUrl;
+	}
+
+	echo absUrl('files/uploads/me.jpg');</code></pre></div>
+							</li>
+							<li class="fragment">
+								Don't ever do this; it's a bad programming style!
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>How we would've fixed this in 1998</h2>
+						<ul>
+							<li class="fragment">
+								Extra function argument
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/scoping3.php">&lt;?php
+
+	$host = 'http://www.myhost.com/';
+
+	function absUrl($relUrl, $host) {
+		return $host . $relUrl;
+	}
+
+	echo absUrl('files/uploads/me.jpg', $host);</code></pre></div>
+							</li>
+							<li class="fragment">
+								Extra function argument, revised
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/scoping4.php">&lt;?php
+
+	function absUrl($relUrl, $host = 'http://www.myhost.com/') {
+		return $host . $relUrl;
+	}
+
+	echo absUrl('files/uploads/me.jpg');</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>How to properly fix it</h2>
+						<ul>
+							<li class="fragment">
+								Use <code>define()</code>
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/scoping5.php">&lt;?php
+
+	define('HOST', 'http://www.myhost.com/');
+
+	function absUrl($relUrl) {
+		return HOST . $relUrl;
+	}
+
+	echo absUrl('files/uploads/me.jpg');</code></pre></div>
+							</li>
+							<li class="fragment">
+								Course convention: always use <code>define()</code>, never use <code>global</code>
+							</li>
+						</ul>
+					</section>
+				</section>
+				
+
+				<!-- Errors and debugging: @, dump() -->
+				<section>
+					<section>
+						<h2>Errors and debugging</h2>
+					</section>
+
+					<section>
+						<h2>Suppress errors with <code>@</code></h2>
+						<ul>
+							<li class="fragment">
+								It's possible, but don't use it that often
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/errors1.php">&lt;?php
+
+	function divide($numerator, $denominator) {
+		return $numerator / $denominator;
+	}
+	
+	echo divide(1, 2) . PHP_EOL;	// 0.5
+	echo divide(1, 0) . PHP_EOL;	// "Warning: Division by zero"
+	echo @divide(1, 0) . PHP_EOL;	// (suppressed)
+	echo divide(1, 2) . PHP_EOL;	// 0.5</code></pre></div>
+							</li>
+							<li class="fragment">
+								Later on, we'll learn how to work with <code>Exception</code>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Debugging helper functions</h2>
+						<ul>
+							<li class="fragment">
+								This won't work
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; $arr = array('one', 'two', 'three');
+php &gt; echo $arr;
+Array</code></pre></div>
+							</li>
+							<li class="fragment">
+								Use <code>print_r()</code> and <code>var_dump()</code> instead to inspect variables
+								<div class="fragment"><pre class="bigger"><code class="language-php">php &gt; print_r($arr);
+Array
+(
+    [0] => one
+    [1] => two
+    [2] => three
+)
+php &gt; var_dump($arr);
+array(3) {
+  [0]=>
+  string(3) "one"
+  [1]=>
+  string(3) "two"
+  [2]=>
+  string(5) "three"
+}</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Real debugging</h2>
+						<ul>
+							<li class="fragment">
+								Using <code>print_r()</code> and <code>var_dump()</code> is no real debugging
+							</li>
+							<li class="fragment">
+								Real debugging is possible with
+								<ul>
+									<li>Built-in IDE debugger (eg. Zend Studio has one, Aptana had one)</li>
+									<li>External debugger, linked to IDE (eg. XDebug + Netbeans/Aptana)</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+				</section>
+				
+
+				<!-- Dates in PHP: epoch, time functions, params -->
+				<section>
+					<section>
+						<h2>Dates in PHP</h2>
+					</section>
+
+					<section>
+						<h2>Timestamps</h2>
+						<ul>
+							<li class="fragment">
+								<em>Epoch time</em>
+								<ul>
+									<li>
+										Numerical value: number of seconds since the epoch
+										<ul>
+											<li>epoch = Midnight January 1st, 1970 (GMT)</li>
+											<li>Not counting leap seconds</li>
+										</ul>
+									</li>
+									<li>Also known as <em>Unix time</em> or <em>Posix time</em></li>
+									<li>Dates expressed in Unix time are called <em>timestamps</em></li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Allow one to precisely indicate a given point in time
+								<ul>
+									<li><code>0</code> = January 1 1970, 00:00:00 GMT</li>
+									<li><code>86400</code> = Januari 2 1970, 00:00:00 GMT</li>
+									<li><code>31536000</code> = Januari 1 1971, 00:00:00 GMT</li>
+									<li><code>440423100</code> = December 26 1983, 11:45:00 GMT</li>
+									<li><code>946684800</code> = Januari 1 2000, 00:00:00 GMT</li>
+									<li><code>1234567890</code> = February 13 2009, 23:31:30 GMT</li>
+									<li>&hellip;</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+
+					<section>
+						<h2>Dates and PHP</h2>
+						<ul>
+							<li class="fragment">
+								Timestampfunctions in PHP
+								<ul>
+									<li><code>time()</code> returns the number of seconds since the epoch</li>
+									<li><code>mktime()</code> allows you to build a timestamp for a given hour, minute, second, month, day and year</li>
+								</ul>
+							</li>
+							<li class="fragment">
+								Converting between dates and timestamps
+								<ul>
+									<li>
+										<code>strtotime(string $time, [int $now])</code>
+										<ul>
+											<li>Convert a given date to a timestamp</li>
+											<li><code>$time</code> is something like <code>2012-24-09</code> but can also be <code>next friday</code></li>
+											<li>Second (optional) param used to calculate an offset</li>
+										</ul>
+									</li>
+									<li>
+										<code>date(string $format, [int $timestamp])</code>
+										<ul>
+											<li>Convert a given timestamp to a date</li>
+											<li>If <code>$timestamp</code> is empty, the current one is used</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+
+
+					<section>
+						<h2>Date Format</h2>
+						<ul>
+							<li class="fragment">
+								The <code>$format</code> param needs to be built manually
+								<table>
+									<thead>
+										<tr>
+											<th><code>format</code> character</th>
+											<th>Description</th>
+											<th>Example returned values</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><em>d</em></td>
+											<td>Day of the month, 2 digits with leading zeros</td>
+											<td><em>01</em> to <em>31</em></td>
+										</tr>
+										<tr>
+											<td><em>D</em></td>
+											<td>A textual representation of a day, three letters</td>
+											<td><em>Mon</em> through <em>Sun</em></td>
+										</tr>
+										<tr>
+											<td><em>l</em> (lowercase 'L')</td>
+											<td>A full textual representation of the day of the week</td>
+											<td><em>Sunday</em> through <em>Saturday</em></td>
+										</tr>
+										<tr>
+											<td><em>w</em></td>
+											<td>Numeric representation of the day of the week</td>
+											<td><em>0</em> (for Sunday) through <em>6</em> (for Saturday)</td>
+										</tr>
+										<tr>
+											<td><em>F</em></td>
+											<td>A full textual representation of a month, such as January or March</td>
+											<td><em>January</em> through <em>December</em></td>
+										</tr>
+										<tr>
+											<td><em>m</em></td>
+											<td>Numeric representation of a month, with leading zeros</td>
+											<td><em>01</em> through <em>12</em></td>
+										</tr>
+										<tr>
+											<td><em>M</em></td>
+											<td>A short textual representation of a month, three letters</td>
+											<td><em>Jan</em> through <em>Dec</em></td>
+										</tr>
+										<tr>
+											<td><em>Y</em></td>
+											<td>A full numeric representation of a year, 4 digits</td>
+											<td>Examples: <em>1999</em> or <em>2003</em></td>
+										</tr>
+										<tr>
+											<td><em>y</em></td>
+											<td>A two digit representation of a year</td>
+											<td>Examples: <em>99</em> or <em>03</em></td>
+										</tr>
+										<tr>
+											<td><em>H</em></td>
+											<td>24-hour format of an hour with leading zeros</td>
+											<td><em>00</em> through <em>23</em></td>
+										</tr>
+										<tr>
+											<td><em>i</em></td>
+											<td>Minutes with leading zeros</td>
+											<td><em>00</em> to <em>59</em></td>
+										</tr>
+										<tr>
+											<td><em>s</em></td>
+											<td>Seconds, with leading zeros</td>
+											<td><em>00</em> through <em>59</em></td>
+										</tr>
+									</tbody>
+								</table>
+							</li>
+						</ul>
+						<footer class="fragment">Note: this is only a fragment. Full list at <a href="http://php.net/date">http://php.net/date</a></footer>
+					</section>
+
+
+					<section>
+						<h2>Date Examples</h2>
+						<ul>
+							<li class="fragment">
+								Example 1
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/dates1.php">&lt;?php
+	echo date('l');
+	echo date('l jS \of F Y h:i:s A');
+	echo 'July 1, 2000 is on a ' . date('l', mktime(0, 0, 0, 7, 1, 2000));</code></pre></div>
+							</li>
+							<li class="fragment">
+								Example 2
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/dates2.php">&lt;?php
+	// Assuming today is March 10th, 2001, 5:16:18 pm, and that we are in the
+	// Mountain Standard Time (MST) Time Zone
+	$today = mktime(17,16,18,3,10,2001);
+	date_default_timezone_set('America/Phoenix');
+
+	echo date('F j, Y, g:i a'); // March 10, 2001, 5:16 pm
+	echo date('m.d.y'); // 03.10.01
+	echo date('j, n, Y'); // 10, 3, 2001
+	echo date('Ymd'); // 20010310
+	echo date('h-i-s, j-m-y, it is'); // 05-16-18, 10-03-01, 1631 1618
+	echo date('\i\t \i\s \t\h\e jS \d\a\y.'); // it is the 10th day.
+	echo date('D M j G:i:s T Y'); // Sat Mar 10 17:16:18 MST 2001
+	echo date('H:m:s \m \i\s\ \m\o\n\t\h'); // 17:03:18 m is month
+	echo date('H:i:s'); // 17:16:18</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+				
+
+				<!-- CLI input, output -->
+				<section>
+					<section>
+						<h2>CLI input/output</h2>
+					</section>
+
+					<section>
+						<h2>CLI Arguments</h2>
+						<ul>
+							<li class="fragment">
+								The CLI allows arguments being passed in
+							</li>
+							<li class="fragment">
+								PHP automatically populates two vars: <code>$argc</code> and <code>$argv</code>
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/cli-args1.php">&lt;?php
+	echo 'Number of arguments ' . $argc . PHP_EOL;
+	foreach ($argv as $key =&gt; $value) {
+		echo 'Argument #' . $key . ' : ' . $value . PHP_EOL;
+	}</code></pre></div>
+								<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php cli-args1.php foo bar baz
+Number of arguments 4
+Argument #0 : args1.php
+Argument #1 : foo
+Argument #2 : bar
+Argument #3 : baz</code></pre></div>
+							</li>
+						</ul>
+						<footer class="fragment">Beware: <code>$argc</code> and <code>$argv</code> only available in CLI mode!</footer>
+					</section>
+
+					<section>
+						<h2>Named CLI Arguments (1)</h2>
+						<ul>
+							<li class="fragment">
+								You can also use named arguments if you want, but it gets a bit tricky
+							</li>
+							<li class="fragment">
+								Version 1
+								<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
+	$args = getopt('ab:c::'); 
+	# nothing = don't accept any value (why? WHYYYY?)
+	# trailing : = required
+	# trailing :: = optional
+	var_dump($args);</code></pre></div>
+								<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php cli-args2.php -a -b 2 -c3
+array(3) {
+  ["a"]=>
+  bool(false)
+  ["b"]=>
+  string(1) "2"
+  ["c"]=>
+  string(1) "3"
+}</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Named CLI Arguments (2)</h2>
+						<ul>
+							<li class="fragment">
+								Version 2
+								<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
+	$args = getopt('', array('a', 'b:', 'c::')); 
+	# nothing = don't accept any value (why? WHYYYY?)
+	# trailing : = required
+	# trailing :: = optional
+	var_dump($args);</code></pre></div>
+								<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php cli-args3.php --a --b "2" --c=3
+array(3) {
+  ["a"]=>
+  bool(false)
+  ["b"]=>
+  string(1) "2"
+  ["c"]=>
+  string(1) "3"
+}</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Interactive scripts</h2>
+						<ul>
+							<li class="fragment">
+								Use <code>readline()</code> to ask for input whilst the script is runnning
+								<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
+	$name = readline('What is your name? ');
+	$city = readline('Where to you live? ');
+	echo 'Hello ' . $name . ' from ' . $city . PHP_EOL;</code></pre></div>
+								<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php cli-interactive.php 
+What is your name? Bramus
+Where to you live? Vinkt
+Hello Bramus from Vinkt</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>STDIN/STDOUT/STDERR (1)</h2>
+						<ul>
+							<li class="fragment">
+								PHP (in CLI mode) automatically opens some <a href="http://php.net/manual/en/features.commandline.io-streams.php">io streams</a>
+							</li>
+							<li class="fragment">
+								<code>STDIN</code> = input
+								<div class="fragment"><pre class="bigger"><code class="language-php">&lt;?php
+	while(!feof(STDIN)) {
+		$line = trim(fgets(STDIN));
+		if(strlen($line) &gt; 0) {
+			echo strrev($line).PHP_EOL;
+		}
+	}</code></pre></div>
+								<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ cat cli-stdin-input.txt
+monkey
+elephant
+cow
+giraffe
+
+bramus$ cat cli-stdin-input.txt | php cli-stdin.php 
+yeknom
+tnahpele
+woc
+effarig</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>STDIN/STDOUT/STDERR (2)</h2>
+						<ul>
+							<li class="fragment">
+								<code>STDOUT</code>/<code>STDERR</code> = output
+								<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php -r "fwrite(STDOUT, 'hello world');"
+hello world</code></pre></div>
+								<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php -r "fwrite(STDERR, 'hello world');"
+hello world</code></pre></div>
+							</li>
+							<li class="fragment">
+								Difference between <code>STDOUT</code> and <code>STDERR</code>?
+								<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php -r "fwrite(STDOUT, 'stdout world') . fwrite(STDERR, 'stderr world');" > /dev/null
+stderr world</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Interactive scripts, Revisited</h2>
+						<ul>
+							<li class="fragment">
+								Unfortunately <code>readline()</code> <a href="http://php.net/manual/en/intro.readline.php">isn't available on Windows</a></em>
+							</li>
+							<li class="fragment">
+								Fortunately we can knock up an alternative for that platform, using <code>STDIN</code>
+								<div class="fragment"><pre class="bigger"><code class="language-php">function getInput($question = '') {
+	if (!function_exists('readline')) {
+		echo $question . ' ';
+		return stream_get_line(STDIN, 1024, PHP_EOL);
+	} else {
+		return readline($question . ' ');
+	}
+}
+
+$name = getInput('What is your name?');
+$city = getInput('Where to you live?');
+echo 'Hello ' . $name . ' from ' . $city . PHP_EOL;</code></pre></div>
+							</li>
+						</ul>
+					</section>
+				</section>
+				
+
+				<!-- More CLI: Lint a file, check the config -->
+				<section>
+					<section>
+						<h2>More CLI goodness</h2>
+					</section>
+
+					<section>
+						<h2>Check a file syntax</h2>
+						<ul>
+							<li class="fragment">
+								Check a file for syntax errors with <code>php -l faulty.php</code>
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/faulty.php">&lt;?php
+	echo $foo;
+	for ($x = 0; $x &lt; 5; x++) {
+		echo $x;
+	}</code></pre></div>
+							</li>
+							<li class="fragment">
+								PHP will tell you what went wrong and where
+								<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php -l faulty.php 
+
+Parse error: parse error, expecting `')'' in faulty.php on line 4
+Errors parsing faulty.php</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Check your PHP config</h2>
+						<ul>
+							<li class="fragment">
+								Check your PHP config by running <code>php -i</code>
+								<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php -i
+phpinfo()
+PHP Version => 5.3.15
+
+System => Darwin brm.local 12.2.0 Darwin Kernel Version 12.2.0: Sat Aug 25 00:48:52 PDT 2012; root:xnu-2050.18.24~1/RELEASE_X86_64 x86_64
+Build Date => Aug 24 2012 17:40:23
+Configure Command =>  '/private/var/tmp/apache_mod_php/apache_mod_php-79~4/php/configure'  '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-depe...</code></pre></div>
+							</li>
+							<li class="fragment">
+								If you don't have access to the shell of the machine, upload a file with these contents to it and load it via the browser
+								<div class="fragment"><pre class="bigger"><code class="language-php" data-overlay-example="assets/01/examples/phpinfo.php">&lt;?php
+	phpinfo();</code></pre></div>
+							</li>
+						</ul>
+					</section>
+
+					<section>
+						<h2>Other command options</h2>
+						<ul>
+							<li class="fragment">
+								Know your PHP version by running <code>php -v</code>
+								<div class="fragment"><pre class="bigger"><code class="language-php">bramus$ php -v
+PHP 5.3.15 with Suhosin-Patch (cli) (built: Aug 24 2012 17:45:44) 
+Copyright (c) 1997-2012 The PHP Group
+Zend Engine v2.3.0, Copyright (c) 1998-2012 Zend Technologies</code></pre></div>
+							</li>
+							<li class="fragment">
+								Convert a PHP file to a syntax highlighted HTML file with <code>php -s file.php</code>
+							</li>
+						</ul>
+					</section>
+
+				</section>
+
+				
+
+				<!-- Conventions: code style -->
+				<section>
+					<section>
+						<h2>Closing note: course conventions</h2>
+					</section>
+					<section>
+						<h2>Course conventions (1)</h2>
+						<ul>
+							<li>Code in English</li>
+							<li>Use the full PHP open tag <code>&lt;?php</code>. The closing tag may be omitted</li>
+							<li>Develop with <code>error_reporting()</code> set to <code>E_ALL</code> and <code>display_errors()</code> set to <code>On</code></li>
+							<li>Develop without the XDebug extension (for now)</li>
+							<li>
+								Correctly indent code
+								<ul>
+									<li>Within <code>if-else</code>,<code>do-while</code>,<code>for/foreach</code>, <code>switch</code>,...</li>
+									<li>Indent with a <code>TAB</code>, not a few spaces</li>
+								</ul>
+							</li>
+							<li>
+								Comment your code properly
+								<ul>
+									<li>Think of the code checking your code afterwards</li>
+									<li>Use PHPDoc-compliant comments</li>
+								</ul>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Course conventions (2)</h2>
+						<ul>
+							<li>Never use <code>global</code> but preferably use a constant/define</li>
+							<li>Use single quotes to delimit strings</li>
+							<li>
+								Give variables and functions a clear name and use camelCasing
+								<ul>
+									<li>e.g. $numArticles, $firstName, calculateDistance(), etc.</li>
+									<li>Exception: counters in loops such as $x, $y</li>
+								</ul>
+							</li>
+							<li>
+								Curly brackets always go on the same line as the keyword
+							</li>
+							<li>
+								Use <em>identical operatos</em> when comparing variables/values
+							</li>
+							<li>
+								Cast variables to prevent stupid errors
+							</li>
+							<li>
+								Never use <code>$_REQUEST</code> (see 04.forms)
+							</li>
+							<li>
+								In case of doubt: check the domestic conventions or ask your lecturer
+							</li>
+						</ul>
+					</section>
+				</section>
+
+
+				<!-- The END -->
+				<section>
+					<section>
+						<h2>Questions?</h2>
+						<footer>
+							<em><a href="http://www.ikdoeict.be/">ikdoeict.be</a> &mdash; <a href="mailto:bramus.vandamme@kahosl.be">bramus.vandamme@kahosl.be</a></em>
+						</footer>
+					</section>
+				</section>
+
+
+
+				<!-- Sources -->
+				<section id="sources">
+					<section>
+						<h2>Sources</h2>
+						<ul>
+							<li><a href="http://www.bram.us/2012/06/19/php-cli-the-other-sapi/">PHP CLI, the other SAPI</a> by <a href="https://twitter.com/ThijsFeryn">Thijs Feryn</a></li>
+						</ul>
+					</section>
+				</section>
+				
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+				<span id="revealIndex">/</span>
+			</aside>
+			
+			<!-- Index Link -->
+			<aside class="back">
+				<a href="index.html">&larr; Back to index</a>
+			</aside>
+
+			<!-- ikdoeict.be Link -->
+			<a href="http://www.ikdoeict.be/" title="ikdoeict.be" id="ikdoeict">ikdoeict.be</a>
+			
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="js/reveal.js"></script>
+		<script src="lib/highlight.js"></script>
+		<script src="lib/prefixfree.js"></script>
+		<script src="lib/css-snippets.js"></script>
+		<script src="lib/css-edit.js"></script>
+		<script src="lib/incrementable.js"></script>
+		<script src="js/main.js"></script>
+
+	</body>
+</html>

@@ -1,0 +1,59 @@
+/*
+ * Page-specific styles
+ *
+ * @author Rogier van der Linde <rogier.vanderlinde@kahosl.be>
+ */
+
+body {
+	padding: 20px;
+}
+h2 {
+	margin-bottom: 20px;
+	font-size: 24px;
+}
+ul#thumbsmenu {
+	float: left;
+	list-style: none;
+	clear: left;
+}
+ul#thumbsmenu li {
+	margin-bottom: 6px;
+	padding-right: 40px;
+	clear: left;
+}
+img#photoBig {
+	height: 290px;
+}
+
+
+ul#nav {
+	display: block;
+}
+
+ul#nav li {
+	width: 77px;
+	height: 50px;
+	margin-top: 2px;
+	padding-top: 5px;
+	padding-left: 5px;
+	float: left;
+}
+
+
+
+ul#thumbsmenu li:hover {
+	background-image: url(../img/lineLightGray.png);
+}
+ul#thumbsmenu li.active {
+	background-image: url(../img/lineDarkGray.png);
+}
+
+
+ul#interval {
+	clear: left;
+}
+
+
+ul#interval li {
+	float: left;
+}

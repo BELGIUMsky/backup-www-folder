@@ -1,0 +1,29 @@
+in command venster
+
+naar mapje van bestand gaan
+
+kijken met dir dat bestand php is
+
+dan uitvoeren met php opgave_1.php
+
+
+
+
+
+
+
+
+
+
+
+
+git clone https: // github.com/bramus/ws1-svs-course-materials
+
+
+
+
+
+type opgave7.php
+
+cat opgave7.txt | opgave_7.php (waarde) (waarde = 0, -1, 1, ...)
+stdin stdout bestaat
